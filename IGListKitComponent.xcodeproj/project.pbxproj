@@ -14,6 +14,10 @@
 		93DED71028D3501800089708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93DED70E28D3501800089708 /* Main.storyboard */; };
 		93DED71228D3501900089708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93DED71128D3501900089708 /* Assets.xcassets */; };
 		93DED71528D3501900089708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93DED71328D3501900089708 /* LaunchScreen.storyboard */; };
+		93DED71F28D3512200089708 /* ComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DED71E28D3512200089708 /* ComponentViewModel.swift */; };
+		93DED72128D3513500089708 /* ComponentSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DED72028D3513500089708 /* ComponentSectionController.swift */; };
+		93DED72328D3515600089708 /* ComponentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DED72228D3515600089708 /* ComponentCollectionViewCell.swift */; };
+		93DED72728D353FF00089708 /* ComponentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93DED72628D353FF00089708 /* ComponentCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		93DED71128D3501900089708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93DED71428D3501900089708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93DED71628D3501900089708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93DED71E28D3512200089708 /* ComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewModel.swift; sourceTree = "<group>"; };
+		93DED72028D3513500089708 /* ComponentSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentSectionController.swift; sourceTree = "<group>"; };
+		93DED72228D3515600089708 /* ComponentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCollectionViewCell.swift; sourceTree = "<group>"; };
+		93DED72628D353FF00089708 /* ComponentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComponentCollectionViewCell.xib; sourceTree = "<group>"; };
 		ABCEFB316783FE170C0C797F /* Pods-IGListKitComponent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IGListKitComponent.debug.xcconfig"; path = "Target Support Files/Pods-IGListKitComponent/Pods-IGListKitComponent.debug.xcconfig"; sourceTree = "<group>"; };
 		E0E0F0FB7C468E30E4B060C8 /* Pods_IGListKitComponent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IGListKitComponent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -63,6 +71,7 @@
 		93DED70728D3501800089708 /* IGListKitComponent */ = {
 			isa = PBXGroup;
 			children = (
+				93DED71D28D350C500089708 /* Component */,
 				93DED70828D3501800089708 /* AppDelegate.swift */,
 				93DED70A28D3501800089708 /* SceneDelegate.swift */,
 				93DED70C28D3501800089708 /* ViewController.swift */,
@@ -72,6 +81,17 @@
 				93DED71628D3501900089708 /* Info.plist */,
 			);
 			path = IGListKitComponent;
+			sourceTree = "<group>";
+		};
+		93DED71D28D350C500089708 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				93DED71E28D3512200089708 /* ComponentViewModel.swift */,
+				93DED72028D3513500089708 /* ComponentSectionController.swift */,
+				93DED72228D3515600089708 /* ComponentCollectionViewCell.swift */,
+				93DED72628D353FF00089708 /* ComponentCollectionViewCell.xib */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		ECCBB362A99CBDDC45F3B25D /* Frameworks */ = {
@@ -88,7 +108,6 @@
 				ABCEFB316783FE170C0C797F /* Pods-IGListKitComponent.debug.xcconfig */,
 				8519ADF53DFF2B3CE5626D8C /* Pods-IGListKitComponent.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -154,6 +173,7 @@
 			files = (
 				93DED71528D3501900089708 /* LaunchScreen.storyboard in Resources */,
 				93DED71228D3501900089708 /* Assets.xcassets in Resources */,
+				93DED72728D353FF00089708 /* ComponentCollectionViewCell.xib in Resources */,
 				93DED71028D3501800089708 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,7 +229,10 @@
 			files = (
 				93DED70D28D3501800089708 /* ViewController.swift in Sources */,
 				93DED70928D3501800089708 /* AppDelegate.swift in Sources */,
+				93DED71F28D3512200089708 /* ComponentViewModel.swift in Sources */,
 				93DED70B28D3501800089708 /* SceneDelegate.swift in Sources */,
+				93DED72328D3515600089708 /* ComponentCollectionViewCell.swift in Sources */,
+				93DED72128D3513500089708 /* ComponentSectionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
