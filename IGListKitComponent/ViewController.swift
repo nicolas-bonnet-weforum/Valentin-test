@@ -8,6 +8,12 @@
 import UIKit
 import IGListKit
 
+class ComponentCollectionViewFlowLayout: UICollectionViewFlowLayout {
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
+}
+
 class ViewController: UIViewController {
     
     required public init?(coder: NSCoder) {
@@ -19,8 +25,13 @@ class ViewController: UIViewController {
     }()
 
     public lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = ComponentCollectionViewFlowLayout()
+//        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.estimatedItemSize = CGSize(width: 1, height: 1)
+
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.alwaysBounceVertical = true
+//        collectionView.contentInsetAdjustmentBehavior = .always
         return collectionView
     }()
 
@@ -39,6 +50,15 @@ class ViewController: UIViewController {
         
         adapter.collectionView = collectionView
         adapter.dataSource = self
+
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        collectionView.frame = view.bounds
+
+        print("VCBounds:", self.view.bounds)
+
     }
     
     /// The override allows the view to update when the scene size changes.
@@ -59,10 +79,35 @@ class ViewController: UIViewController {
 extension ViewController: ListAdapterDataSource {
     open func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         var data: [ListDiffable] = []
-        data.append(ComponentViewModel(text: ""))
-        data.append(ComponentViewModel(text: ""))
-        data.append(ComponentViewModel(text: ""))
-        data.append(ComponentViewModel(text: ""))
+
+//        data.append(ComponentViewModel(attributedText: NSAttributedString("Attributed text comes here: This is **Bold text** and this is _italic_")))
+
+        let attributedString = NSMutableAttributedString(string: "This should be a very long attributed string that needs wrapping. This should be a very long attributed string that needs wrapping. This should be a very long attributed string that needs wrapping")
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 8), range: NSRange(location: 0, length: 5))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 6, length: 6))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: NSRange(location: 12, length: 5))
+        data.append(ComponentViewModel(attributedText: attributedString))
+        var imgArr = [UIImage]()
+        if let img = UIImage(named: "CuteCat1") {
+            imgArr.append(img)
+        }
+        data.append(ComponentViewModel(attributedText: attributedString, imagesArray: imgArr))
+        
+        let attributedString2 = NSMutableAttributedString(string: "This should be a shorter attributed string")
+        attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: 4))
+        attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 10), range: NSRange(location: 5, length: 6))
+        attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 22), range: NSRange(location: 17, length: 7))
+        if let img2 = UIImage(named: "CuteCat2") {
+            imgArr.append(img2)
+        }
+        data.append(ComponentViewModel(attributedText: attributedString2, imagesArray: imgArr))
+        
+        if let img3 = UIImage(named: "CuteCat3") {
+            imgArr.append(img3)
+        }
+        data.append(ComponentViewModel(text: "Simple text", imagesArray: imgArr))
+        data.append(ComponentViewModel(text: "Simple text long, simple text long, simple text long, simple text long, simple text long"))
+
         return data
     }
 
@@ -74,6 +119,7 @@ extension ViewController: ListAdapterDataSource {
     }
 
     open func emptyView(for listAdapter: ListAdapter) -> UIView? { return nil }
+    
 }
 
 

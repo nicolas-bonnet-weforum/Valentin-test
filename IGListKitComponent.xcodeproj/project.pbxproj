@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A8F2EEA290C1B350096D883 /* ComponentViewModelDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8F2EE9290C1B350096D883 /* ComponentViewModelDataType.swift */; };
 		13C1233B4BDA95073E1D8B34 /* Pods_IGListKitComponent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E0F0FB7C468E30E4B060C8 /* Pods_IGListKitComponent.framework */; };
 		93DED70928D3501800089708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DED70828D3501800089708 /* AppDelegate.swift */; };
 		93DED70B28D3501800089708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DED70A28D3501800089708 /* SceneDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A8F2EE9290C1B350096D883 /* ComponentViewModelDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewModelDataType.swift; sourceTree = "<group>"; };
 		8519ADF53DFF2B3CE5626D8C /* Pods-IGListKitComponent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IGListKitComponent.release.xcconfig"; path = "Target Support Files/Pods-IGListKitComponent/Pods-IGListKitComponent.release.xcconfig"; sourceTree = "<group>"; };
 		93DED70528D3501800089708 /* IGListKitComponent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IGListKitComponent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93DED70828D3501800089708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				93DED71E28D3512200089708 /* ComponentViewModel.swift */,
+				0A8F2EE9290C1B350096D883 /* ComponentViewModelDataType.swift */,
 				93DED72028D3513500089708 /* ComponentSectionController.swift */,
 				93DED72228D3515600089708 /* ComponentCollectionViewCell.swift */,
 				93DED72628D353FF00089708 /* ComponentCollectionViewCell.xib */,
@@ -231,6 +234,7 @@
 				93DED70928D3501800089708 /* AppDelegate.swift in Sources */,
 				93DED71F28D3512200089708 /* ComponentViewModel.swift in Sources */,
 				93DED70B28D3501800089708 /* SceneDelegate.swift in Sources */,
+				0A8F2EEA290C1B350096D883 /* ComponentViewModelDataType.swift in Sources */,
 				93DED72328D3515600089708 /* ComponentCollectionViewCell.swift in Sources */,
 				93DED72128D3513500089708 /* ComponentSectionController.swift in Sources */,
 			);

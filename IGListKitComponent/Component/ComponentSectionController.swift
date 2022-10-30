@@ -8,15 +8,30 @@
 import IGListKit
 
 class ComponentSectionController: ListSectionController {
-    private var model: ComponentViewModel?
+    private var model: ComponentViewModelDataType?
+    
+    override init() {
+        super.init()
+//        inset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+//        minimumLineSpacing = 4
+//        minimumInteritemSpacing = 4
+//        self.contentInsetAdjustmentBehavior = .never
 
+    }
+    
     override func numberOfItems() -> Int {
         return 1
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
+        
         guard let collectionContext = collectionContext else { return .zero }
-        return CGSize(width: collectionContext.containerSize.width, height: 150)
+        return CGSize(width: collectionContext.containerSize.width, height: 55)
+
+//        guard let model = model else { return .zero }
+//        let width = collectionContext.containerSize.width
+//        let height = ComponentCollectionViewCell.cellHeight(with: model, width: width)
+//        return CGSize(width: collectionContext.containerSize.width, height: height)
     }
 
     override func cellForItem(at index: Int) -> UICollectionViewCell {
@@ -37,7 +52,7 @@ class ComponentSectionController: ListSectionController {
     }
 
     override func didUpdate(to object: Any) {
-        precondition(object is ComponentViewModel)
-        model = (object as! ComponentViewModel)
+        precondition(object as? ComponentViewModelDataType != nil )
+        model = (object as! ComponentViewModelDataType)
     }
 }

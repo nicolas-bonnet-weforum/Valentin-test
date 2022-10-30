@@ -8,10 +8,11 @@
 import IGListKit
 
 /// Model...
-public class ComponentViewModel: NSObject {
+public class ComponentViewModel: NSObject, ComponentViewModelDataType {
     
-    /// ...
-    var text: String
+    public var text: String?
+    public var attributedText: NSAttributedString?
+    public var imagesArray: [UIImage]
     
     /// String that allow IGListKit to recognize the view model from one refresh to an other. This is important to set when you want to have the component animating when data are being changed.
     let identifier: String?
@@ -20,8 +21,11 @@ public class ComponentViewModel: NSObject {
     /// - Parameters:
     ///   - text: ...
     ///   - identifier: String that allow IGListKit to recognize the view model from one refresh to an other. This is important to set when you want to have the component animating when data are being changed.
-    public init(text: String, identifier: String? = nil) {
+    public init(text: String? = nil, attributedText: NSAttributedString? = nil, imagesArray: [UIImage] = [UIImage](), identifier: String? = nil) {
         self.text = text
+        self.attributedText = attributedText
+        self.imagesArray = imagesArray
+
         self.identifier = identifier
         super.init()
     }
@@ -36,7 +40,7 @@ extension ComponentViewModel: ListDiffable {
     public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
         guard let object = object as? ComponentViewModel else { return false }
         guard self !== object else { return true }
-        return text == object.text
+        return text == object.text && attributedText == object.attributedText
     }
 }
 
