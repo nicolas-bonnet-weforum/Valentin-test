@@ -13,6 +13,17 @@ public class ComponentViewModel: NSObject, ComponentViewModelDataType {
     public var text: String?
     public var attributedText: NSAttributedString?
     public var imagesArray: [UIImage]
+    public var lineSpacing: CGFloat = 20 {
+        didSet {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = lineSpacing
+            if let attributedText = attributedText {
+                var attrStr = NSMutableAttributedString(attributedString: attributedText)
+                attrStr.addAttribute(.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedText.length))
+                self.attributedText = attrStr
+            }
+        }
+    }
     
     /// String that allow IGListKit to recognize the view model from one refresh to an other. This is important to set when you want to have the component animating when data are being changed.
     let identifier: String?

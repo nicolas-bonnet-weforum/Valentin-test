@@ -13,8 +13,8 @@ class ComponentSectionController: ListSectionController {
     override init() {
         super.init()
 //        inset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-//        minimumLineSpacing = 4
-//        minimumInteritemSpacing = 4
+        minimumLineSpacing = 100
+        minimumInteritemSpacing = 4
 //        self.contentInsetAdjustmentBehavior = .never
 
     }

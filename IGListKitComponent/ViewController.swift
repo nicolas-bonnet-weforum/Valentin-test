@@ -79,34 +79,60 @@ class ViewController: UIViewController {
 extension ViewController: ListAdapterDataSource {
     open func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
         var data: [ListDiffable] = []
-
+        var model: ComponentViewModel
+        
 //        data.append(ComponentViewModel(attributedText: NSAttributedString("Attributed text comes here: This is **Bold text** and this is _italic_")))
 
         let attributedString = NSMutableAttributedString(string: "This should be a very long attributed string that needs wrapping. This should be a very long attributed string that needs wrapping. This should be a very long attributed string that needs wrapping")
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 8), range: NSRange(location: 0, length: 5))
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 6, length: 6))
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: NSRange(location: 12, length: 5))
-        data.append(ComponentViewModel(attributedText: attributedString))
+//        attributedString.addAttribute(.font, value: UIFont.systemFont (ofSize: 12), range: NSRange(location: 0, length: 5))
+//        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12), range: NSRange(location: 6, length: 6))
+//        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12), range: NSRange(location: 12, length: 5))
+        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 4))
+        attributedString.addAttribute(.font, value: UIFont.italicSystemFont(ofSize: 12), range: NSRange(location: 5, length: 6))
+        attributedString.addAttribute(.font, value: UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .black), range: NSRange(location: 17, length: 7))
+        model = ComponentViewModel(attributedText: attributedString)
+        model.lineSpacing = 20
+        data.append(model)
         var imgArr = [UIImage]()
         if let img = UIImage(named: "CuteCat1") {
             imgArr.append(img)
         }
-        data.append(ComponentViewModel(attributedText: attributedString, imagesArray: imgArr))
+        
+        model = ComponentViewModel(attributedText: attributedString, imagesArray: imgArr)
+        model.lineSpacing = 20
+        data.append(model)
         
         let attributedString2 = NSMutableAttributedString(string: "This should be a shorter attributed string")
-        attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: 4))
-        attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 10), range: NSRange(location: 5, length: 6))
-        attributedString2.addAttribute(.font, value: UIFont.systemFont(ofSize: 22), range: NSRange(location: 17, length: 7))
+        attributedString2.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 4))
+        attributedString2.addAttribute(.font, value: UIFont.italicSystemFont(ofSize: 12), range: NSRange(location: 5, length: 6))
+        attributedString2.addAttribute(.font, value: UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .black), range: NSRange(location: 17, length: 7))
         if let img2 = UIImage(named: "CuteCat2") {
             imgArr.append(img2)
         }
-        data.append(ComponentViewModel(attributedText: attributedString2, imagesArray: imgArr))
+        model = ComponentViewModel(attributedText: attributedString2, imagesArray: imgArr)
+        model.lineSpacing = 20
+        data.append(model)
         
+
         if let img3 = UIImage(named: "CuteCat3") {
             imgArr.append(img3)
         }
+        
         data.append(ComponentViewModel(text: "Simple text", imagesArray: imgArr))
-        data.append(ComponentViewModel(text: "Simple text long, simple text long, simple text long, simple text long, simple text long"))
+
+        let attributedString3 = NSMutableAttributedString(string: "This should be a medium leghts attributed string on two lines")
+        attributedString3.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 4))
+        attributedString3.addAttribute(.font, value: UIFont.italicSystemFont(ofSize: 12), range: NSRange(location: 5, length: 6))
+        attributedString3.addAttribute(.font, value: UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .black), range: NSRange(location: 17, length: 7))
+        
+        model = ComponentViewModel(attributedText: attributedString3, imagesArray: imgArr)
+        model.lineSpacing = 20
+        data.append(model)
+
+        
+        imgArr.removeFirst()
+        imgArr.removeFirst()
+        data.append(ComponentViewModel(text: "Simple text long, simple text long, simple text long, simple text long, simple text long", imagesArray: imgArr))
 
         return data
     }

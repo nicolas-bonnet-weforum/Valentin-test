@@ -21,9 +21,11 @@ class ComponentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var viewContacts: UIView!
     @IBOutlet weak var constraintWViewContacts: NSLayoutConstraint!
     @IBOutlet weak var constraintHSpaceToContacts: NSLayoutConstraint!
-    @IBOutlet weak var constraintContactsViewBottom: NSLayoutConstraint!
-    @IBOutlet weak var constraintLabelBottom: NSLayoutConstraint!
-
+    @IBOutlet var constraintContactsViewBottom: NSLayoutConstraint!
+    @IBOutlet var constraintLabelBottom: NSLayoutConstraint!
+    @IBOutlet var constraintCentersLabelContacts: NSLayoutConstraint!
+    @IBOutlet var constraintContactsViewTop: NSLayoutConstraint!
+    
     override class func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -35,9 +37,11 @@ class ComponentCollectionViewCell: UICollectionViewCell {
             v.removeFromSuperview()
         }
 
+
     }
     
     func configureWith(_ model: ComponentViewModelDataType) {
+        constraintContactsViewBottom.isActive = false
         labelText.translatesAutoresizingMaskIntoConstraints = false
 
         if let text = model.text {
@@ -78,7 +82,34 @@ class ComponentCollectionViewCell: UICollectionViewCell {
             }
         }
         viewContacts.backgroundColor = .green
+        self.layer.borderColor = UIColor.red.cgColor
+        self.layer.borderWidth = 2
+        self.clipsToBounds = true
+
         print("bounds:", self.bounds)
+        
+        let labelHeight = ComponentCollectionViewCell.textHeight(labelText.attributedText!, containerWidth: labelText.bounds.width)
+        print("labelHeight = ", labelHeight)
+        let numberOfLines = ceil(labelHeight/(labelText.font.pointSize + model.lineSpacing))
+        if numberOfLines < 2 {
+            constraintContactsViewBottom.isActive = true
+            constraintLabelBottom.isActive = false
+            constraintCentersLabelContacts.isActive = false
+            constraintContactsViewTop.isActive = true
+        }
+        else if numberOfLines == 2 {
+            constraintContactsViewBottom.isActive = false
+            constraintLabelBottom.isActive = true
+            constraintCentersLabelContacts.isActive = true
+            constraintContactsViewTop.isActive = false
+        }
+        else {
+            constraintContactsViewBottom.isActive = false
+            constraintLabelBottom.isActive = true
+            constraintCentersLabelContacts.isActive = false
+            constraintContactsViewTop.isActive = true
+        }
+
     }
     
     static func textHeight(_ attributedText: NSAttributedString, containerWidth: CGFloat) -> CGFloat {
@@ -91,39 +122,46 @@ class ComponentCollectionViewCell: UICollectionViewCell {
         return ceil(rect.size.height)
     }
 
-    static func availableWidth(_ width: CGFloat, _ data: ComponentViewModelDataType) -> CGFloat {
-        var availableWidth = width - insets.left - insets.right
-        if data.imagesArray.count > 0 {
-            availableWidth -= hSpaceToContacts
-            // for each image substract image size
-            for (index, _) in data.imagesArray.enumerated() {
-                availableWidth -= imageSize
-                // starting with the second one, substract overlap
-                if index > 0 {
-                    availableWidth += imageOverlap
-                }
-            }
-        }
-        return availableWidth
-    }
+//    static func availableWidth(_ width: CGFloat, _ data: ComponentViewModelDataType) -> CGFloat {
+//        var availableWidth = width - insets.left - insets.right
+//        if data.imagesArray.count > 0 {
+//            availableWidth -= hSpaceToContacts
+//            // for each image substract image size
+//            for (index, _) in data.imagesArray.enumerated() {
+//                availableWidth -= imageSize
+//                // starting with the second one, substract overlap
+//                if index > 0 {
+//                    availableWidth += imageOverlap
+//                }
+//            }
+//        }
+//        return availableWidth
+//    }
     
-    static func cellHeight(with data: ComponentViewModelDataType, width: CGFloat) -> CGFloat {
-        var cellHeight: CGFloat = insets.top + insets.bottom
-        var nsAttributedString = NSAttributedString(string: "")
-        if let attrText = data.attributedText {
-            nsAttributedString = attrText
-        }
-        else if let simpleText = data.text {
-            let myAttribute = [ NSAttributedString.Key.font: font ]
-            nsAttributedString = NSAttributedString(string: simpleText, attributes: myAttribute)
-        }
-
-        let availableW = availableWidth(width, data)
-        cellHeight += textHeight(nsAttributedString, containerWidth: availableW)
-        if data.imagesArray.count > 0 && cellHeight < imageSize {
-            cellHeight = imageSize + insets.top + insets.bottom
-        }
-        return cellHeight
+//    static func cellHeight(with data: ComponentViewModelDataType, width: CGFloat) -> CGFloat {
+//        var cellHeight: CGFloat = insets.top + insets.bottom
+//        var nsAttributedString = NSAttributedString(string: "")
+//        if let attrText = data.attributedText {
+//            nsAttributedString = attrText
+//        }
+//        else if let simpleText = data.text {
+//            let myAttribute = [ NSAttributedString.Key.font: font ]
+//            nsAttributedString = NSAttributedString(string: simpleText, attributes: myAttribute)
+//        }
+//
+//        let availableW = availableWidth(width, data)
+//        cellHeight += textHeight(nsAttributedString, containerWidth: availableW)
+//        if data.imagesArray.count > 0 && cellHeight < imageSize {
+//            cellHeight = imageSize + insets.top + insets.bottom
+//        }
+//        return cellHeight
+//
+//    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let labelHeight = ComponentCollectionViewCell.textHeight(labelText.attributedText!, containerWidth: labelText.bounds.width)
+        print("labelHeight = ", labelHeight)
         
     }
     

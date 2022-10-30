@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y3Q-5i-UaF" userLabel="ContactsView">
-                        <rect key="frame" x="251" y="5" width="32" height="32"/>
+                        <rect key="frame" x="266" y="0.0" width="32" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="4pw-yp-HuD"/>
@@ -26,23 +26,28 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3P-BW-aEb">
-                        <rect key="frame" x="5" y="5" width="222" height="42"/>
+                        <rect key="frame" x="0.0" y="0.0" width="242" height="32"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Y3Q-5i-UaF" firstAttribute="centerY" secondItem="t3P-BW-aEb" secondAttribute="centerY" id="85p-ax-Eb2"/>
                     <constraint firstItem="Y3Q-5i-UaF" firstAttribute="leading" secondItem="t3P-BW-aEb" secondAttribute="trailing" constant="24" id="Kbi-6e-4Nj"/>
-                    <constraint firstAttribute="bottom" secondItem="t3P-BW-aEb" secondAttribute="bottom" constant="5" id="d28-eq-NWh"/>
-                    <constraint firstAttribute="trailing" secondItem="Y3Q-5i-UaF" secondAttribute="trailing" constant="15" id="ppT-4T-HoV"/>
-                    <constraint firstItem="t3P-BW-aEb" firstAttribute="leading" secondItem="aTi-7D-KWh" secondAttribute="leading" constant="5" id="vKJ-u5-3nS"/>
-                    <constraint firstItem="Y3Q-5i-UaF" firstAttribute="top" secondItem="aTi-7D-KWh" secondAttribute="top" constant="5" id="wAL-IN-Vv6"/>
-                    <constraint firstItem="t3P-BW-aEb" firstAttribute="top" secondItem="aTi-7D-KWh" secondAttribute="top" constant="5" id="wcv-Sq-d1s"/>
+                    <constraint firstAttribute="bottom" secondItem="Y3Q-5i-UaF" secondAttribute="bottom" priority="990" id="Q8Z-5w-Gfe"/>
+                    <constraint firstAttribute="bottom" secondItem="t3P-BW-aEb" secondAttribute="bottom" id="d28-eq-NWh"/>
+                    <constraint firstAttribute="trailing" secondItem="Y3Q-5i-UaF" secondAttribute="trailing" id="ppT-4T-HoV"/>
+                    <constraint firstItem="t3P-BW-aEb" firstAttribute="leading" secondItem="aTi-7D-KWh" secondAttribute="leading" id="vKJ-u5-3nS"/>
+                    <constraint firstItem="Y3Q-5i-UaF" firstAttribute="top" secondItem="aTi-7D-KWh" secondAttribute="top" id="wAL-IN-Vv6"/>
+                    <constraint firstItem="t3P-BW-aEb" firstAttribute="top" secondItem="aTi-7D-KWh" secondAttribute="top" id="wcv-Sq-d1s"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="298" height="52"/>
             <connections>
+                <outlet property="constraintCentersLabelContacts" destination="85p-ax-Eb2" id="6N7-Ic-jES"/>
+                <outlet property="constraintContactsViewBottom" destination="Q8Z-5w-Gfe" id="vCm-pE-cgn"/>
+                <outlet property="constraintContactsViewTop" destination="wAL-IN-Vv6" id="qo8-7N-8aB"/>
                 <outlet property="constraintHSpaceToContacts" destination="Kbi-6e-4Nj" id="vnx-Di-Mvn"/>
                 <outlet property="constraintLabelBottom" destination="d28-eq-NWh" id="QUh-Da-BIn"/>
                 <outlet property="constraintWViewContacts" destination="q9M-65-9Ho" id="IBk-O3-lta"/>
