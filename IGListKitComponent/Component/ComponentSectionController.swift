@@ -10,12 +10,12 @@ import IGListKit
 class ComponentSectionController: ListSectionController {
     private var model: ComponentViewModelDataType?
     
+    
     override init() {
         super.init()
-//        inset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        inset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         minimumLineSpacing = 100
         minimumInteritemSpacing = 4
-//        self.contentInsetAdjustmentBehavior = .never
 
     }
     
@@ -24,16 +24,10 @@ class ComponentSectionController: ListSectionController {
     }
 
     override func sizeForItem(at index: Int) -> CGSize {
-        
         guard let collectionContext = collectionContext else { return .zero }
         return CGSize(width: collectionContext.containerSize.width, height: 55)
-
-//        guard let model = model else { return .zero }
-//        let width = collectionContext.containerSize.width
-//        let height = ComponentCollectionViewCell.cellHeight(with: model, width: width)
-//        return CGSize(width: collectionContext.containerSize.width, height: height)
     }
-
+    
     override func cellForItem(at index: Int) -> UICollectionViewCell {
         guard let cell = collectionContext!.dequeueReusableCell(withNibName: "ComponentCollectionViewCell", bundle: Bundle(for: self.classForCoder), for: self, at: index) as? ComponentCollectionViewCell else { fatalError() }
         if let model = model {

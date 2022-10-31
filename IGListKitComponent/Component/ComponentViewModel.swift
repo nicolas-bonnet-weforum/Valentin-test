@@ -24,6 +24,7 @@ public class ComponentViewModel: NSObject, ComponentViewModelDataType {
             }
         }
     }
+    public var styling: ComponentViewModeStylingType = ComponentViewModelStyling()
     
     /// String that allow IGListKit to recognize the view model from one refresh to an other. This is important to set when you want to have the component animating when data are being changed.
     let identifier: String?
@@ -40,6 +41,21 @@ public class ComponentViewModel: NSObject, ComponentViewModelDataType {
         self.identifier = identifier
         super.init()
     }
+}
+
+public class ComponentViewModelStyling: ComponentViewModeStylingType {
+    public var font: UIFont
+    public var imageSize: CGFloat
+    public var imageOverlap: CGFloat
+    public var hSpaceToContacts: CGFloat
+    
+    init(font: UIFont = UIFont.systemFont(ofSize: 14), imageSize: CGFloat = 32, imageOverlap: CGFloat = 12, hSpaceToContacts: CGFloat = 24) {
+        self.font = font
+        self.imageSize = imageSize
+        self.imageOverlap = imageOverlap
+        self.hSpaceToContacts = hSpaceToContacts
+    }
+
 }
 
 extension ComponentViewModel: ListDiffable {

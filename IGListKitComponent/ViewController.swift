@@ -31,7 +31,6 @@ class ViewController: UIViewController {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.alwaysBounceVertical = true
-//        collectionView.contentInsetAdjustmentBehavior = .always
         return collectionView
     }()
 
@@ -52,15 +51,7 @@ class ViewController: UIViewController {
         adapter.dataSource = self
 
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-//        collectionView.frame = view.bounds
-
-        print("VCBounds:", self.view.bounds)
-
-    }
-    
+        
     /// The override allows the view to update when the scene size changes.
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -81,12 +72,7 @@ extension ViewController: ListAdapterDataSource {
         var data: [ListDiffable] = []
         var model: ComponentViewModel
         
-//        data.append(ComponentViewModel(attributedText: NSAttributedString("Attributed text comes here: This is **Bold text** and this is _italic_")))
-
         let attributedString = NSMutableAttributedString(string: "This should be a very long attributed string that needs wrapping. This should be a very long attributed string that needs wrapping. This should be a very long attributed string that needs wrapping")
-//        attributedString.addAttribute(.font, value: UIFont.systemFont (ofSize: 12), range: NSRange(location: 0, length: 5))
-//        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12), range: NSRange(location: 6, length: 6))
-//        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12), range: NSRange(location: 12, length: 5))
         attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 12), range: NSRange(location: 0, length: 4))
         attributedString.addAttribute(.font, value: UIFont.italicSystemFont(ofSize: 12), range: NSRange(location: 5, length: 6))
         attributedString.addAttribute(.font, value: UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .black), range: NSRange(location: 17, length: 7))
@@ -99,7 +85,7 @@ extension ViewController: ListAdapterDataSource {
         }
         
         model = ComponentViewModel(attributedText: attributedString, imagesArray: imgArr)
-        model.lineSpacing = 20
+        model.lineSpacing = 12
         data.append(model)
         
         let attributedString2 = NSMutableAttributedString(string: "This should be a shorter attributed string")
@@ -110,7 +96,7 @@ extension ViewController: ListAdapterDataSource {
             imgArr.append(img2)
         }
         model = ComponentViewModel(attributedText: attributedString2, imagesArray: imgArr)
-        model.lineSpacing = 20
+        model.lineSpacing = 5
         data.append(model)
         
 
@@ -126,7 +112,7 @@ extension ViewController: ListAdapterDataSource {
         attributedString3.addAttribute(.font, value: UIFont.monospacedDigitSystemFont(ofSize: 12, weight: .black), range: NSRange(location: 17, length: 7))
         
         model = ComponentViewModel(attributedText: attributedString3, imagesArray: imgArr)
-        model.lineSpacing = 20
+        model.lineSpacing = 8
         data.append(model)
 
         

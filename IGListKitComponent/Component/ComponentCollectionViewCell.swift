@@ -9,13 +9,6 @@ import UIKit
 
 /// A cell that...
 class ComponentCollectionViewCell: UICollectionViewCell {
-    
-    fileprivate static let insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-    fileprivate static let font = UIFont.systemFont(ofSize: 14)
-    static let imageSize: CGFloat = 32
-    fileprivate static let imageOverlap: CGFloat = 12
-    fileprivate static let hSpaceToContacts: CGFloat = 24
-    
 
     @IBOutlet weak var labelText: UILabel!
     @IBOutlet weak var viewContacts: UIView!
@@ -37,7 +30,6 @@ class ComponentCollectionViewCell: UICollectionViewCell {
             v.removeFromSuperview()
         }
 
-
     }
     
     func configureWith(_ model: ComponentViewModelDataType) {
@@ -57,39 +49,34 @@ class ComponentCollectionViewCell: UICollectionViewCell {
             constraintWViewContacts.constant = 0
         }
         else {
-            constraintHSpaceToContacts.constant = ComponentCollectionViewCell.hSpaceToContacts
-            constraintWViewContacts.constant = ComponentCollectionViewCell.imageSize * imgCount - ComponentCollectionViewCell.imageOverlap * (imgCount - 1)
-            print("constraintWViewContacts.constant = ", constraintWViewContacts.constant)
+            constraintHSpaceToContacts.constant = model.styling.hSpaceToContacts
+            constraintWViewContacts.constant = model.styling.imageSize * imgCount - model.styling.imageOverlap * (imgCount - 1)
             for (index, img) in model.imagesArray.enumerated() {
                 let imgView = UIImageView(image: img)
-                imgView.frame = CGRect(x: 0, y: 0, width: ComponentCollectionViewCell.imageSize, height: ComponentCollectionViewCell.imageSize)
+                imgView.frame = CGRect(x: 0, y: 0, width: model.styling.imageSize, height: model.styling.imageSize)
                 imgView.translatesAutoresizingMaskIntoConstraints = false
                 imgView.contentMode = .scaleAspectFill
                 imgView.layer.borderWidth = 1
                 imgView.layer.masksToBounds = false
-                imgView.layer.borderColor = UIColor.red.cgColor
-//                imgView.layer.cornerRadius = imgView.frame.height/2
+                imgView.layer.borderColor = UIColor.white.cgColor
+                imgView.layer.cornerRadius = imgView.frame.height/2
                 imgView.clipsToBounds = true
                 viewContacts.addSubview(imgView)
 
-                let constant = CGFloat(index) * (ComponentCollectionViewCell.imageSize - ComponentCollectionViewCell.imageOverlap)
-                print("constant:", constant)
-                imgView.widthAnchor.constraint(equalToConstant: ComponentCollectionViewCell.imageSize).isActive = true
-                imgView.heightAnchor.constraint(equalToConstant: ComponentCollectionViewCell.imageSize).isActive = true
+                let constant = CGFloat(index) * (model.styling.imageSize - model.styling.imageOverlap)
+                imgView.widthAnchor.constraint(equalToConstant: model.styling.imageSize).isActive = true
+                imgView.heightAnchor.constraint(equalToConstant: model.styling.imageSize).isActive = true
                 NSLayoutConstraint(item: imgView, attribute: .leadingMargin, relatedBy: .equal, toItem: imgView.superview, attribute: .leadingMargin, multiplier: 1, constant: constant).isActive = true
                 NSLayoutConstraint(item: imgView, attribute: .topMargin, relatedBy: .equal, toItem: imgView.superview, attribute: .topMargin, multiplier: 1, constant: 0).isActive = true
 
             }
         }
-        viewContacts.backgroundColor = .green
-        self.layer.borderColor = UIColor.red.cgColor
-        self.layer.borderWidth = 2
+
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 1
         self.clipsToBounds = true
 
-        print("bounds:", self.bounds)
-        
         let labelHeight = ComponentCollectionViewCell.textHeight(labelText.attributedText!, containerWidth: labelText.bounds.width)
-        print("labelHeight = ", labelHeight)
         let numberOfLines = ceil(labelHeight/(labelText.font.pointSize + model.lineSpacing))
         if numberOfLines < 2 {
             constraintContactsViewBottom.isActive = true
@@ -113,64 +100,18 @@ class ComponentCollectionViewCell: UICollectionViewCell {
     }
     
     static func textHeight(_ attributedText: NSAttributedString, containerWidth: CGFloat) -> CGFloat {
-        print("containerWidth:", containerWidth)
         let rect = attributedText.boundingRect(with: CGSize.init(width: containerWidth, height: CGFloat.greatestFiniteMagnitude),
                                                options: [.usesLineFragmentOrigin, .usesFontLeading],
                                                context: nil)
-        print("calculatedHeight =", ceil(rect.size.height), "calculatedWidth =", ceil(rect.size.width))
 
         return ceil(rect.size.height)
     }
 
-//    static func availableWidth(_ width: CGFloat, _ data: ComponentViewModelDataType) -> CGFloat {
-//        var availableWidth = width - insets.left - insets.right
-//        if data.imagesArray.count > 0 {
-//            availableWidth -= hSpaceToContacts
-//            // for each image substract image size
-//            for (index, _) in data.imagesArray.enumerated() {
-//                availableWidth -= imageSize
-//                // starting with the second one, substract overlap
-//                if index > 0 {
-//                    availableWidth += imageOverlap
-//                }
-//            }
-//        }
-//        return availableWidth
-//    }
-    
-//    static func cellHeight(with data: ComponentViewModelDataType, width: CGFloat) -> CGFloat {
-//        var cellHeight: CGFloat = insets.top + insets.bottom
-//        var nsAttributedString = NSAttributedString(string: "")
-//        if let attrText = data.attributedText {
-//            nsAttributedString = attrText
-//        }
-//        else if let simpleText = data.text {
-//            let myAttribute = [ NSAttributedString.Key.font: font ]
-//            nsAttributedString = NSAttributedString(string: simpleText, attributes: myAttribute)
-//        }
-//
-//        let availableW = availableWidth(width, data)
-//        cellHeight += textHeight(nsAttributedString, containerWidth: availableW)
-//        if data.imagesArray.count > 0 && cellHeight < imageSize {
-//            cellHeight = imageSize + insets.top + insets.bottom
-//        }
-//        return cellHeight
-//
-//    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let labelHeight = ComponentCollectionViewCell.textHeight(labelText.attributedText!, containerWidth: labelText.bounds.width)
-        print("labelHeight = ", labelHeight)
-        
-    }
-    
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         setNeedsLayout()
         layoutIfNeeded()
         let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
         var newFrame = layoutAttributes.frame
-        // note: don't change the width
         newFrame.size.height = ceil(size.height)
         layoutAttributes.frame = newFrame
         return layoutAttributes

@@ -13,5 +13,14 @@ public protocol ComponentViewModelDataType {
     var attributedText: NSAttributedString? { get set }
     var imagesArray: [UIImage] { get set }
     var lineSpacing: CGFloat { get set }
+    var styling: ComponentViewModeStylingType { get set }
 
 }
+
+public protocol ComponentViewModeStylingType {
+    var font: UIFont { get set }
+    var imageSize: CGFloat { get set }
+    var imageOverlap: CGFloat { get set }
+    var hSpaceToContacts: CGFloat { get set }
+}
+
